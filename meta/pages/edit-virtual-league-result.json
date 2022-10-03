@@ -1,0 +1,602 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "closeLabel",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Item no longer available.",
+                  "type": "label",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "type": "close-popup"
+                      }
+                    ]
+                  },
+                  "icon": "",
+                  "name": "closeButton",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Close",
+                  "type": "button",
+                  "visible": "${!canEdit}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "components": [
+            {
+              "class": "col-md-9",
+              "components": [
+                {
+                  "name": "label0",
+                  "style": {
+                    "fontWeight": "bold"
+                  },
+                  "text": "Another user has made conflicting changes to one or more of the fields you have modified. Please reload.",
+                  "type": "label",
+                  "visible": "${hasChanges}"
+                }
+              ],
+              "name": "col0",
+              "type": "col"
+            },
+            {
+              "class": "col-md-3",
+              "components": [
+                {
+                  "buttonStyle": "secondary",
+                  "events": {
+                    "click": [
+                      {
+                        "code": "await this.Load()",
+                        "type": "execute"
+                      }
+                    ]
+                  },
+                  "icon": "autorenew",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "20px"
+                  },
+                  "text": "Reload",
+                  "type": "button",
+                  "visible": "${hasChanges}"
+                }
+              ],
+              "name": "col1",
+              "type": "col"
+            }
+          ],
+          "name": "row0",
+          "style": {},
+          "type": "row"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "League Season",
+                              "component": "SeasonID",
+                              "name": "SeasonIDLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getLeagueSeasonsResult}",
+                              "textProperty": "SeasonName",
+                              "valueProperty": "SeasonID",
+                              "placeholder": "Choose LeagueSeason",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "SeasonID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${virtualleagueresult.SeasonID}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "SeasonIDRequiredValidator",
+                              "component": "SeasonID",
+                              "text": "SeasonID is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Match Day",
+                              "component": "MatchDayID",
+                              "name": "MatchDayIDLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getMatchDaysResult}",
+                              "textProperty": "MatchDayName",
+                              "valueProperty": "MatchDayID",
+                              "placeholder": "Choose MatchDay",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "MatchDayID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${virtualleagueresult.MatchDayID}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "MatchDayIDRequiredValidator",
+                              "component": "MatchDayID",
+                              "text": "MatchDayID is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Team",
+                              "component": "HomeTeamID",
+                              "name": "HomeTeamIDLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getTeamsResult}",
+                              "textProperty": "TeamName",
+                              "valueProperty": "TeamID",
+                              "placeholder": "Choose Team",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "HomeTeamID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${virtualleagueresult.HomeTeamID}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "HomeTeamIDRequiredValidator",
+                              "component": "HomeTeamID",
+                              "text": "HomeTeamID is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Home Score",
+                              "component": "HomeScore",
+                              "name": "HomeScoreLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "int",
+                              "type": "numeric",
+                              "name": "HomeScore",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${virtualleagueresult.HomeScore}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "HomeScoreRequiredValidator",
+                              "component": "HomeScore",
+                              "text": "HomeScore is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Team",
+                              "component": "AwayTeamID",
+                              "name": "AwayTeamIDLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getTeamsResult}",
+                              "textProperty": "TeamName",
+                              "valueProperty": "TeamID",
+                              "placeholder": "Choose Team",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "AwayTeamID",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${virtualleagueresult.AwayTeamID}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "AwayTeamIDRequiredValidator",
+                              "component": "AwayTeamID",
+                              "text": "AwayTeamID is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Away Score",
+                              "component": "AwayScore",
+                              "name": "AwayScoreLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "int",
+                              "type": "numeric",
+                              "name": "AwayScore",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${virtualleagueresult.AwayScore}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "AwayScoreRequiredValidator",
+                              "component": "AwayScore",
+                              "text": "AwayScore is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to update VirtualLeagueResult",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          },
+                          {
+                            "name": "hasChanges",
+                            "type": "set",
+                            "value": "result.Message.Contains(\"412\")",
+                            "valueType": "bool"
+                          },
+                          {
+                            "name": "canEdit",
+                            "type": "set",
+                            "condition": "!result.Message.Contains(\"412\")",
+                            "value": "false",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "name": "ConData.updateVirtualLeagueResult",
+                        "parameters": [
+                          {
+                            "name": "RecordID",
+                            "value": "${parameters.RecordID}"
+                          },
+                          {
+                            "name": "VirtualLeagueResult",
+                            "value": "${virtualleagueresult}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${virtualleagueresult}",
+                            "condition": "result.StatusCode != System.Net.HttpStatusCode.PreconditionFailed"
+                          },
+                          {
+                            "name": "hasChanges",
+                            "type": "set",
+                            "value": "result.StatusCode == System.Net.HttpStatusCode.PreconditionFailed",
+                            "valueType": "bool"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "itemType": "VirtualLeague.Models.ConData.VirtualLeagueResult",
+                  "data": "${virtualleagueresult}",
+                  "visible": "${virtualleagueresult != null && canEdit}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "hasChanges",
+        "type": "set",
+        "value": "false",
+        "valueType": "bool"
+      },
+      {
+        "name": "canEdit",
+        "type": "set",
+        "value": "true",
+        "valueType": "bool"
+      },
+      {
+        "name": "ConData.getVirtualLeagueResultByRecordID",
+        "parameters": [
+          {
+            "name": "RecordID",
+            "value": "${parameters.RecordID}"
+          }
+        ],
+        "then": [
+          {
+            "name": "virtualleagueresult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "VirtualLeague.Models.ConData.VirtualLeagueResult"
+          },
+          {
+            "name": "canEdit",
+            "type": "set",
+            "value": "result != null",
+            "valueType": "bool"
+          }
+        ],
+        "error": [],
+        "type": "invoke"
+      },
+      {
+        "name": "ConData.getLeagueSeasons",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getLeagueSeasonsResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<VirtualLeague.Models.ConData.LeagueSeason>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "ConData.getMatchDays",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getMatchDaysResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<VirtualLeague.Models.ConData.MatchDay>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "ConData.getTeams",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getTeamsResult",
+            "type": "set",
+            "value": "${result.Value.AsODataEnumerable()}",
+            "valueType": "IEnumerable<VirtualLeague.Models.ConData.Team>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "Edit Virtual League Result",
+  "layout": "Main"
+}

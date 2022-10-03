@@ -1,0 +1,95 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = VirtualLeague.Client
+build_property.RootNamespace = VirtualLeague.Client
+build_property.ProjectDir = C:\VirtualLeague\client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\VirtualLeague\client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/VirtualLeague/client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/AddFixtureTemplate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkRml4dHVyZVRlbXBsYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/AddLeagueSeason.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkTGVhZ3VlU2Vhc29uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/AddMatchDay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkTWF0Y2hEYXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/AddTeam.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkVGVhbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/AddVirtualLeagueResult.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkVmlydHVhbExlYWd1ZVJlc3VsdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/EditFixtureTemplate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdEZpeHR1cmVUZW1wbGF0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/EditLeagueSeason.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdExlYWd1ZVNlYXNvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/EditMatchDay.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdE1hdGNoRGF5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/EditTeam.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFRlYW0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/EditVirtualLeagueResult.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdFZpcnR1YWxMZWFndWVSZXN1bHQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/FixtureTemplates.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRml4dHVyZVRlbXBsYXRlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/LeagueSeasons.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhZ3VlU2Vhc29ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/MatchDays.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWF0Y2hEYXlzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/Teams.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGVhbXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Pages/VirtualLeagueResults.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlydHVhbExlYWd1ZVJlc3VsdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Shared/LoginLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/VirtualLeague/client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

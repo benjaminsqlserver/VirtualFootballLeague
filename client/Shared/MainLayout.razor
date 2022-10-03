@@ -1,0 +1,60 @@
+﻿@inherits VirtualLeague.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using VirtualLeague.Models.ConData
+@using VirtualLeague.Pages
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<RadzenLayout>
+  <ChildContent>
+    <RadzenHeader>
+      <ChildContent>
+        <div class="row justify-content-start align-items-center">
+          <div class="col-6 d-flex align-items-center">
+            <RadzenSidebarToggle Click="@SidebarToggle0Click">
+            </RadzenSidebarToggle>
+            <RadzenLabel Text="VirtualLeague">
+            </RadzenLabel>
+          </div>
+          <div class="col-6 text-right">
+          </div>
+        </div>
+      </ChildContent>
+    </RadzenHeader>
+    <RadzenBody @ref="body0">
+      <ChildContent>
+        <RadzenContentContainer Name="main">
+        @Body
+        </RadzenContentContainer>
+      </ChildContent>
+    </RadzenBody>
+    <RadzenSidebar @ref="sidebar0">
+      <ChildContent>
+        <RadzenPanelMenu style="height: 100%">
+          <ChildContent>
+            <RadzenPanelMenuItem Path="teams" Text="Teams">
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Path="fixture-templates" Text="Fixture Templates">
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Path="league-seasons" Text="League Seasons">
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Path="virtual-league-results" Text="Virtual League Results">
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Path="match-days" Text="Match Days">
+            </RadzenPanelMenuItem>
+          </ChildContent>
+        </RadzenPanelMenu>
+      </ChildContent>
+    </RadzenSidebar>
+    <RadzenFooter>
+      <ChildContent>
+        <RadzenLabel Text="VirtualLeague, Copyright Ⓒ 2022">
+        </RadzenLabel>
+      </ChildContent>
+    </RadzenFooter>
+  </ChildContent>
+</RadzenLayout>

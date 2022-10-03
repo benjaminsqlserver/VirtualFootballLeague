@@ -1,0 +1,46 @@
+﻿@page "/fixture-templates"
+@layout MainLayout
+@inherits VirtualLeague.Pages.FixtureTemplatesComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using VirtualLeague.Models.ConData
+<PageTitle>Fixture Templates</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Fixture Templates">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getFixtureTemplatesResult" Count="@getFixtureTemplatesCount" TItem="VirtualLeague.Models.ConData.FixtureTemplate" LoadData="@Grid0LoadData" RowDoubleClick="@Grid0RowDoubleClick">
+          <Columns>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.FixtureTemplate" Property="TemplateID" Title="Template ID">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.FixtureTemplate" Property="HomeTeam" Title="Home Team">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.FixtureTemplate" Property="AwayTeam" Title="Away Team">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.FixtureTemplate" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="virtualLeagueModelsConDataFixtureTemplate">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, virtualLeagueModelsConDataFixtureTemplate))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

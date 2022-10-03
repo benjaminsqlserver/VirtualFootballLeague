@@ -1,0 +1,201 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Home Team",
+                              "component": "HomeTeam",
+                              "name": "HomeTeamLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 50,
+                              "type": "textbox",
+                              "name": "HomeTeam",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${fixturetemplate.HomeTeam}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "HomeTeamRequiredValidator",
+                              "component": "HomeTeam",
+                              "text": "HomeTeam is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Away Team",
+                              "component": "AwayTeam",
+                              "name": "AwayTeamLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 50,
+                              "type": "textbox",
+                              "name": "AwayTeam",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${fixturetemplate.AwayTeam}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "AwayTeamRequiredValidator",
+                              "component": "AwayTeam",
+                              "text": "AwayTeam is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new FixtureTemplate!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "ConData.createFixtureTemplate",
+                        "parameters": [
+                          {
+                            "name": "FixtureTemplate",
+                            "value": "${fixturetemplate}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${fixturetemplate}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "data": "${fixturetemplate}",
+                  "visible": "${fixturetemplate != null}",
+                  "itemType": "VirtualLeague.Models.ConData.FixtureTemplate"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "fixturetemplate",
+        "type": "set",
+        "value": "new VirtualLeague.Models.ConData.FixtureTemplate(){}",
+        "valueType": "VirtualLeague.Models.ConData.FixtureTemplate"
+      }
+    ]
+  },
+  "name": "Add Fixture Template",
+  "layout": "Main"
+}

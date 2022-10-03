@@ -1,0 +1,1079 @@
+{
+  "info": {
+    "title": "ConData",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 15,
+    "x-concurrency": true,
+    "x-infer-aspnet": false,
+    "x-infer-tables": true,
+    "x-infer-relations": true,
+    "x-infer-views": true,
+    "x-infer-sps": true
+  },
+  "definitions": {
+    "FixtureTemplate": {
+      "x-table": "dbo.FixtureTemplates",
+      "resource": "FixtureTemplates",
+      "required": [
+        "HomeTeam",
+        "AwayTeam"
+      ],
+      "properties": {
+        "TemplateID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "HomeTeam": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "AwayTeam": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        }
+      }
+    },
+    "LeagueSeason": {
+      "x-table": "dbo.LeagueSeasons",
+      "resource": "LeagueSeasons",
+      "required": [
+        "SeasonName"
+      ],
+      "properties": {
+        "SeasonID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "LeagueSeason",
+              "name": "VirtualLeagueResults",
+              "type": "VirtualLeagueResult"
+            }
+          ]
+        },
+        "SeasonName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "VirtualLeagueResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualLeagueResult"
+          }
+        }
+      }
+    },
+    "MatchDay": {
+      "x-table": "dbo.MatchDays",
+      "resource": "MatchDays",
+      "required": [
+        "MatchDayName"
+      ],
+      "properties": {
+        "MatchDayID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "MatchDay",
+              "name": "VirtualLeagueResults",
+              "type": "VirtualLeagueResult"
+            }
+          ]
+        },
+        "MatchDayName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "VirtualLeagueResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualLeagueResult"
+          }
+        }
+      }
+    },
+    "Team": {
+      "x-table": "dbo.Teams",
+      "resource": "Teams",
+      "required": [
+        "TeamName"
+      ],
+      "properties": {
+        "TeamID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Team",
+              "name": "VirtualLeagueResults",
+              "type": "VirtualLeagueResult"
+            },
+            {
+              "inversePropertyName": "Team1",
+              "name": "VirtualLeagueResults1",
+              "type": "VirtualLeagueResult"
+            }
+          ]
+        },
+        "TeamName": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "VirtualLeagueResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualLeagueResult"
+          }
+        }
+      }
+    },
+    "VirtualLeagueResult": {
+      "x-table": "dbo.VirtualLeagueResults",
+      "resource": "VirtualLeagueResults",
+      "required": [
+        "SeasonID",
+        "MatchDayID",
+        "HomeTeamID",
+        "HomeScore",
+        "AwayTeamID",
+        "AwayScore"
+      ],
+      "properties": {
+        "RecordID": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 19,
+          "type": "integer",
+          "format": "int64"
+        },
+        "LeagueSeason": {
+          "type": "object",
+          "$ref": "#/definitions/LeagueSeason"
+        },
+        "SeasonID": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "LeagueSeasons",
+            "parentEntityType": "LeagueSeason",
+            "type": "LeagueSeason",
+            "principalKey": "SeasonID",
+            "name": "LeagueSeason",
+            "textProperty": "SeasonName",
+            "navigationProperty": "VirtualLeagueResults"
+          }
+        },
+        "MatchDay": {
+          "type": "object",
+          "$ref": "#/definitions/MatchDay"
+        },
+        "MatchDayID": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "MatchDays",
+            "parentEntityType": "MatchDay",
+            "type": "MatchDay",
+            "principalKey": "MatchDayID",
+            "name": "MatchDay",
+            "textProperty": "MatchDayName",
+            "navigationProperty": "VirtualLeagueResults"
+          }
+        },
+        "Team": {
+          "type": "object",
+          "$ref": "#/definitions/Team"
+        },
+        "HomeTeamID": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Teams",
+            "parentEntityType": "Team",
+            "type": "Team",
+            "principalKey": "TeamID",
+            "name": "Team",
+            "textProperty": "TeamName",
+            "navigationProperty": "VirtualLeagueResults"
+          }
+        },
+        "HomeScore": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Team1": {
+          "type": "object",
+          "$ref": "#/definitions/Team"
+        },
+        "AwayTeamID": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Teams",
+            "parentEntityType": "Team",
+            "type": "Team",
+            "principalKey": "TeamID",
+            "name": "Team1",
+            "textProperty": "TeamName",
+            "navigationProperty": "VirtualLeagueResults1"
+          }
+        },
+        "AwayScore": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/FixtureTemplates": {
+      "get": {
+        "operationId": "getFixtureTemplates",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/FixtureTemplate"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createFixtureTemplate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "FixtureTemplate",
+            "schema": {
+              "$ref": "#/definitions/FixtureTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/FixtureTemplate"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/LeagueSeasons": {
+      "get": {
+        "operationId": "getLeagueSeasons",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/LeagueSeason"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createLeagueSeason",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "LeagueSeason",
+            "schema": {
+              "$ref": "#/definitions/LeagueSeason"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/LeagueSeason"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/MatchDays": {
+      "get": {
+        "operationId": "getMatchDays",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/MatchDay"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createMatchDay",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "MatchDay",
+            "schema": {
+              "$ref": "#/definitions/MatchDay"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/MatchDay"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Teams": {
+      "get": {
+        "operationId": "getTeams",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Team"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createTeam",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Team",
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/VirtualLeagueResults": {
+      "get": {
+        "operationId": "getVirtualLeagueResults",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/VirtualLeagueResult"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createVirtualLeagueResult",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "VirtualLeagueResult",
+            "schema": {
+              "$ref": "#/definitions/VirtualLeagueResult"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/VirtualLeagueResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/FixtureTemplates({TemplateID})": {
+      "delete": {
+        "operationId": "deleteFixtureTemplate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TemplateID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getFixtureTemplateByTemplateID",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "TemplateID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/FixtureTemplate"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateFixtureTemplate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TemplateID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "FixtureTemplate",
+            "schema": {
+              "$ref": "#/definitions/FixtureTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/LeagueSeasons({SeasonID})": {
+      "delete": {
+        "operationId": "deleteLeagueSeason",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "SeasonID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getLeagueSeasonBySeasonID",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "SeasonID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LeagueSeason"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateLeagueSeason",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "SeasonID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "LeagueSeason",
+            "schema": {
+              "$ref": "#/definitions/LeagueSeason"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/MatchDays({MatchDayID})": {
+      "delete": {
+        "operationId": "deleteMatchDay",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "MatchDayID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getMatchDayByMatchDayID",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "MatchDayID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/MatchDay"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateMatchDay",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "MatchDayID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "MatchDay",
+            "schema": {
+              "$ref": "#/definitions/MatchDay"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Teams({TeamID})": {
+      "delete": {
+        "operationId": "deleteTeam",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TeamID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getTeamByTeamID",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "TeamID",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateTeam",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "TeamID",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Team",
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/VirtualLeagueResults({RecordID})": {
+      "delete": {
+        "operationId": "deleteVirtualLeagueResult",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RecordID",
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getVirtualLeagueResultByRecordID",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "RecordID",
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/VirtualLeagueResult"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateVirtualLeagueResult",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "RecordID",
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "body",
+            "name": "VirtualLeagueResult",
+            "schema": {
+              "$ref": "#/definitions/VirtualLeagueResult"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/ConData",
+  "host": "localhost:5001",
+  "schemes": [
+    "https"
+  ]
+}

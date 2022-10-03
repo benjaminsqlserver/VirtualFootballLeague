@@ -1,0 +1,52 @@
+﻿@page "/add-fixture-template"
+@layout MainLayout
+@inherits VirtualLeague.Pages.AddFixtureTemplateComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using VirtualLeague.Models.ConData
+<PageTitle>Add Fixture Template</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@fixturetemplate" Visible="@(fixturetemplate != null)" TItem="VirtualLeague.Models.ConData.FixtureTemplate" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Home Team" Component="HomeTeam" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@(fixturetemplate.HomeTeam)" Name="HomeTeam">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="HomeTeam" Text="HomeTeam is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Away Team" Component="AwayTeam" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@(fixturetemplate.AwayTeam)" Name="AwayTeam">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="AwayTeam" Text="AwayTeam is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

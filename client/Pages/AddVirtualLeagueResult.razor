@@ -1,0 +1,100 @@
+﻿@page "/add-virtual-league-result"
+@layout MainLayout
+@inherits VirtualLeague.Pages.AddVirtualLeagueResultComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using VirtualLeague.Models.ConData
+<PageTitle>Add Virtual League Result</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@virtualleagueresult" Visible="@(virtualleagueresult != null)" TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="League Season" Component="SeasonID" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getLeagueSeasonsResult" TextProperty="SeasonName" ValueProperty="SeasonID" Placeholder="Choose LeagueSeason" style="display: block; width: 100%" @bind-Value="@(virtualleagueresult.SeasonID)" Name="SeasonID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="SeasonID" Text="SeasonID is required" style="position: absolute" DefaultValue="0">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Match Day" Component="MatchDayID" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getMatchDaysResult" TextProperty="MatchDayName" ValueProperty="MatchDayID" Placeholder="Choose MatchDay" style="display: block; width: 100%" @bind-Value="@(virtualleagueresult.MatchDayID)" Name="MatchDayID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="MatchDayID" Text="MatchDayID is required" style="position: absolute" DefaultValue="0">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Team" Component="HomeTeamID" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getTeamsResult" TextProperty="TeamName" ValueProperty="TeamID" Placeholder="Choose Team" style="display: block; width: 100%" @bind-Value="@(virtualleagueresult.HomeTeamID)" Name="HomeTeamID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="HomeTeamID" Text="HomeTeamID is required" style="position: absolute" DefaultValue="0">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Home Score" Component="HomeScore" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(virtualleagueresult.HomeScore)" Name="HomeScore">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="HomeScore" Text="HomeScore is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Team" Component="AwayTeamID" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDropDown Data="@getTeamsResult" TextProperty="TeamName" ValueProperty="TeamID" Placeholder="Choose Team" style="display: block; width: 100%" @bind-Value="@(virtualleagueresult.AwayTeamID)" Name="AwayTeamID">
+                </RadzenDropDown>
+                <RadzenRequiredValidator Component="AwayTeamID" Text="AwayTeamID is required" style="position: absolute" DefaultValue="0">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Away Score" Component="AwayScore" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(virtualleagueresult.AwayScore)" Name="AwayScore">
+                </RadzenNumeric>
+                <RadzenRequiredValidator Component="AwayScore" Text="AwayScore is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

@@ -1,0 +1,66 @@
+﻿@page "/virtual-league-results"
+@layout MainLayout
+@inherits VirtualLeague.Pages.VirtualLeagueResultsComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using VirtualLeague.Models.ConData
+<PageTitle>Virtual League Results</PageTitle>
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Virtual League Results">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenSplitButton Icon="get_app" style="margin-left: 10px; margin-bottom: 10px" Text="Export" Click="@Splitbutton0Click">
+          <ChildContent>
+            <RadzenSplitButtonItem Text="Excel" Value="xlsx">
+            </RadzenSplitButtonItem>
+            <RadzenSplitButtonItem Text="CSV" Value="csv">
+            </RadzenSplitButtonItem>
+          </ChildContent>
+        </RadzenSplitButton>
+        <RadzenTextBox Placeholder="Search ..." style="display: block; margin-bottom: 10px; width: 100%" Name="Textbox0" @oninput="@(async(args) => {search = $"{args.Value}";await grid0.GoToPage(0);await grid0.Reload();})">
+        </RadzenTextBox>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getVirtualLeagueResultsResult" Count="@getVirtualLeagueResultsCount" TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" LoadData="@Grid0LoadData" RowDoubleClick="@Grid0RowDoubleClick">
+          <Columns>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Property="RecordID" Title="Record ID">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Property="SeasonID" SortProperty="LeagueSeason.SeasonName" GroupProperty="LeagueSeason.SeasonName" FilterProperty="LeagueSeason.SeasonName" Title="League Season">
+              <Template Context="data">
+              @(data.LeagueSeason?.SeasonName)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Property="MatchDayID" SortProperty="MatchDay.MatchDayName" GroupProperty="MatchDay.MatchDayName" FilterProperty="MatchDay.MatchDayName" Title="Match Day">
+              <Template Context="data">
+              @(data.MatchDay?.MatchDayName)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Property="HomeTeamID" SortProperty="Team.TeamName" GroupProperty="Team.TeamName" FilterProperty="Team.TeamName" Title="Team">
+              <Template Context="data">
+              @(data.Team?.TeamName)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Property="HomeScore" Title="Home Score">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Property="AwayTeamID" SortProperty="Team1.TeamName" GroupProperty="Team1.TeamName" FilterProperty="Team1.TeamName" Title="Team">
+              <Template Context="data">
+              @(data.Team1?.TeamName)
+              </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Property="AwayScore" Title="Away Score">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="VirtualLeague.Models.ConData.VirtualLeagueResult" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="virtualLeagueModelsConDataVirtualLeagueResult">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, virtualLeagueModelsConDataVirtualLeagueResult))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

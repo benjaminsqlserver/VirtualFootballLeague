@@ -1,0 +1,45 @@
+{
+  "dataSources": [
+    "ConData"
+  ],
+  "generator": "@radzen/blazor-server",
+  "https": false,
+  "layouts": [
+    "Login",
+    "Main"
+  ],
+  "logo": "",
+  "name": "VirtualLeague",
+  "navigation": [
+    "Teams",
+    "FixtureTemplates",
+    "Fixture Templates",
+    "League Seasons",
+    "Virtual League Results",
+    "Match Days"
+  ],
+  "pages": [
+    "Teams",
+    "Add Team",
+    "Edit Team",
+    "FixtureTemplates",
+    "Fixture Templates",
+    "Add Fixture Template",
+    "Edit Fixture Template",
+    "League Seasons",
+    "Add League Season",
+    "Edit League Season",
+    "Virtual League Results",
+    "Add Virtual League Result",
+    "Edit Virtual League Result",
+    "Match Days",
+    "Add Match Day",
+    "Edit Match Day"
+  ],
+  "serverLang": "cs",
+  "serverProject": true,
+  "serverVersion": "6",
+  "startPage": "Teams",
+  "theme": "default",
+  "wasm": true
+}

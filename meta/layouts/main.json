@@ -1,0 +1,112 @@
+{
+  "components": [
+    {
+      "components": [
+        {
+          "components": [
+            {
+              "class": "justify-content-start align-items-center",
+              "components": [
+                {
+                  "class": "col-6 d-flex align-items-center",
+                  "components": [
+                    {
+                      "events": {
+                        "click": [
+                          {
+                            "code": "await InvokeAsync(() => { sidebar0.Toggle(); });",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { body0.Toggle(); });",
+                            "type": "execute"
+                          }
+                        ]
+                      },
+                      "name": "sidebar-toggle0",
+                      "type": "sidebar-toggle"
+                    },
+                    {
+                      "name": "label0",
+                      "text": "VirtualLeague",
+                      "type": "label"
+                    }
+                  ],
+                  "name": "leftCol",
+                  "type": "col"
+                },
+                {
+                  "class": "col-6 text-right",
+                  "name": "rightCol",
+                  "type": "col"
+                }
+              ],
+              "name": "headerRow",
+              "type": "row"
+            }
+          ],
+          "name": "header0",
+          "type": "header"
+        },
+        {
+          "components": [
+            {
+              "name": "main",
+              "type": "content-container"
+            }
+          ],
+          "name": "body0",
+          "type": "body"
+        },
+        {
+          "components": [
+            {
+              "items": [
+                {
+                  "path": "teams",
+                  "text": "Teams"
+                },
+                {
+                  "path": "fixture-templates",
+                  "text": "Fixture Templates"
+                },
+                {
+                  "path": "league-seasons",
+                  "text": "League Seasons"
+                },
+                {
+                  "path": "virtual-league-results",
+                  "text": "Virtual League Results"
+                },
+                {
+                  "path": "match-days",
+                  "text": "Match Days"
+                }
+              ],
+              "name": "panelmenu0",
+              "style": {
+                "height": "100%"
+              },
+              "type": "panelmenu"
+            }
+          ],
+          "name": "sidebar0",
+          "type": "sidebar"
+        },
+        {
+          "components": [
+            {
+              "name": "footerText",
+              "text": "VirtualLeague, Copyright Ⓒ 2022",
+              "type": "label"
+            }
+          ],
+          "name": "footer0",
+          "type": "footer"
+        }
+      ],
+      "type": "layout"
+    }
+  ],
+  "name": "Main"
+}
